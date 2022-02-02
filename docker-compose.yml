@@ -1,0 +1,29 @@
+version: '3.5'
+services:
+
+  app:
+    build: .
+    image: src
+    restart: always
+    container_name: tests_app
+    command: >
+      sh -c "python manage.py collectstatic --noinput &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - env.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/src
+    depends_on:
+      - db
+
+  db:
+    restart: always
+    image: postgres:13
+    container_name: tests_db
+    env_file:
+      - db.env
+    volumes:
+      - ./data/test_db_files/:/var/lib/postgresql/data/

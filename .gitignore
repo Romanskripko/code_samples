@@ -1,0 +1,11 @@
+*~
+*.pyc
+.pytest_cache
+__pycache__
+/src/staticfiles
+/staticfiles
+.ipynb_checkpoints
+.env
+data
+venv
+.idea
